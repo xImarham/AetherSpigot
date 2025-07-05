@@ -1,0 +1,10 @@
+/.idea/
+*.iml
+*.DS_Store
+run/
+
+# gradle
+.gradle/
+build/
+
+paperclip.jar
