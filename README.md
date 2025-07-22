@@ -10,4 +10,4 @@ Some components have been removed due to licensing restrictions from the origina
 If you plan to use this for your own server, you must credit the Arcuno Network’s Development Team. Failure to do so may result in appropriate action being taken.
 Credits go to mqaaz for discovering dynamic friction and sharing the information with us. This allowed us to implement it successfully, and servers like Roselia and Arcuno still use the same knockback system to this day though Arcuno’s knockback was recently recoded and it uses a entirely different concept.
 
-© drvzs\@ArcunoNetwork
+© g4\@ArcunoNetwork
