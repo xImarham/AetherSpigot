@@ -71,11 +71,11 @@ public abstract class EntityHuman extends EntityLiving {
     public int oldLevel = -1;
 
     public boolean isDrinking() {
-        return this.isUsingItem() && this.itemInUse.getItem().e(this.itemInUse) == EnumAnimation.DRINK;
+        return this.bS() && this.itemInUse.getItem().e(this.itemInUse) == EnumAnimation.DRINK;
     }
 
     public boolean isEating() {
-        return this.isUsingItem() && this.itemInUse.getItem().e(this.itemInUse) == EnumAnimation.EAT;
+        return this.bS() && this.itemInUse.getItem().e(this.itemInUse) == EnumAnimation.EAT;
     }
 
     @Override
@@ -111,19 +111,19 @@ public abstract class EntityHuman extends EntityLiving {
         this.datawatcher.a(10, Byte.valueOf((byte) 0));
     }
 
-    public boolean isUsingItem() {
+    public boolean bS() {
         return this.itemInUse != null;
     }
 
-    public void stopUsingItem() {
+    public void bU() {
         if (this.itemInUse != null) {
             this.itemInUse.b(this.world, this, this.itemInUseCount);
         }
 
-        this.clearItemInUse();
+        this.bV();
     }
 
-    public void clearItemInUse() {
+    public void bV() {
         this.itemInUse = null;
         this.itemInUseCount = 0;
         if (!this.world.isClientSide) {
@@ -133,7 +133,7 @@ public abstract class EntityHuman extends EntityLiving {
     }
 
     public boolean isBlocking() {
-        return this.isUsingItem() && this.itemInUse.getItem().e(this.itemInUse) == EnumAnimation.BLOCK;
+        return this.bS() && this.itemInUse.getItem().e(this.itemInUse) == EnumAnimation.BLOCK;
     }
 
     public void t_() {
@@ -154,7 +154,7 @@ public abstract class EntityHuman extends EntityLiving {
                     this.s();
                 }
             } else {
-                this.clearItemInUse();
+                this.bV();
             }
         }
 
@@ -361,7 +361,7 @@ public abstract class EntityHuman extends EntityLiving {
                 }
             }
 
-            this.clearItemInUse();
+            this.bV();
         }
 
     }

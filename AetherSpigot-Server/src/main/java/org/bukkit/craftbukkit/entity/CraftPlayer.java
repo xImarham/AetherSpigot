@@ -582,7 +582,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
 
     @Override
     public boolean isUsingItem() {
-        return getHandle().isUsingItem();
+        return getHandle().bS();
     }
 
     @Override

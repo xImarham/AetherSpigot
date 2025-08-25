@@ -399,7 +399,7 @@ public class PlayerInteractManager {
                     entityhuman.inventory.items[entityhuman.inventory.itemInHandIndex] = null;
                 }
 
-                if (!entityhuman.isUsingItem()) {
+                if (!entityhuman.bS()) {
                     ((EntityPlayer) entityhuman).updateInventory(entityhuman.defaultContainer);
                 }
 

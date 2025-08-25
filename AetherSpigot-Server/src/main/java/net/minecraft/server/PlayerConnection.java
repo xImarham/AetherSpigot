@@ -628,7 +628,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
                 return;
 
             case 3: // RELEASE_USE_ITEM
-                this.player.stopUsingItem();
+                this.player.bU();
                 return;
 
             case 4: // START_DESTROY_BLOCK
@@ -1270,7 +1270,7 @@ public class PlayerConnection implements PacketListenerPlayIn, IUpdatePlayerList
 
         // AetherSpigot start
         if (this.player.isBlocking()) {
-            this.player.stopUsingItem();
+            this.player.bU();
         }
         // AetherSpigot end
 
