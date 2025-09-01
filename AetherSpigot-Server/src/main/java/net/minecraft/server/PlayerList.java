@@ -590,7 +590,7 @@ public abstract class PlayerList {
             if (location == null) {
                 cworld = (CraftWorld) this.server.server.getWorlds().get(0);
                 blockposition = cworld.getHandle().getSpawn();
-                location = new Location(cworld, blockposition.getX() + 0.5, blockposition.getY(), blockposition.getZ() + 0.5);
+                location = new Location(cworld, blockposition.getX() + 0.5, blockposition.getY(), blockposition.getZ() + 0.5, cworld.getHandle().getWorldData().getSpawnYaw(), cworld.getHandle().getWorldData().getSpawnPitch());
             }
 
             Player respawnPlayer = cserver.getPlayer(entityplayer1);
@@ -788,6 +788,9 @@ public abstract class PlayerList {
             d0 = (double) blockposition.getX();
             y = (double) blockposition.getY();
             d1 = (double) blockposition.getZ();
+            yaw = worldserver1.getWorldData().getSpawnYaw();
+            pitch = worldserver1.getWorldData().getSpawnPitch();
+
             /*
             entity.setPositionRotation(d0, entity.locY, d1, 90.0F, 0.0F);
             if (entity.isAlive()) {

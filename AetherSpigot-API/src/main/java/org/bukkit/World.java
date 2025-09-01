@@ -495,6 +495,18 @@ public interface World extends PluginMessageRecipient, Metadatable {
     public boolean setSpawnLocation(int x, int y, int z);
 
     /**
+     +     * Sets the spawn location of the world
+     +     *
+     +     * @param x X coordinate
+     +     * @param y Y coordinate
+     +     * @param z Z coordinate
+     +     * @param yaw left-right rotation
+     +     * @param pitch up-down rotation
+     +     * @return True if it was successfully set.
+     +     */
+    public boolean setSpawnLocation(int x, int y, int z, float yaw, float pitch);
+
+    /**
      * Gets the relative in-game time of this world.
      * <p>
      * The relative time is analogous to hours * 1000

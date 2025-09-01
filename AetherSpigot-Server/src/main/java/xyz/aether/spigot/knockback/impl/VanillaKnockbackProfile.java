@@ -76,9 +76,6 @@ public class VanillaKnockbackProfile extends KnockbackProfile {
 
     @Override
     public void handleEntityHuman(EntityPlayer victim, Entity source, int i, Vector vector) {
-
-        double slowdown = (double) this.getKnockbackModifier("slowdown", false).getValue();
-
         int kbLevel = 0;
         if (victim.isSprinting())
             ++kbLevel;
@@ -86,6 +83,7 @@ public class VanillaKnockbackProfile extends KnockbackProfile {
         if (kbLevel > 0) {
             double extraHorizontal = (double) this.getKnockbackModifier("extra-horizontal", false).getValue();
             double extraVertical = (double) this.getKnockbackModifier("extra-vertical", false).getValue();
+            double slowdown = (double) this.getKnockbackModifier("slowdown", false).getValue();
             source.g(-MathHelper.sin(victim.yaw * (float) Math.PI / 180.0F) * kbLevel * extraHorizontal,
                     extraVertical,
                     MathHelper.cos(victim.yaw * (float) Math.PI / 180.0F) * kbLevel * extraHorizontal);

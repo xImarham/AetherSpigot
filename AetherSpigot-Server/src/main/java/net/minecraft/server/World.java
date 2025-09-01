@@ -3322,6 +3322,10 @@ public abstract class World implements IBlockAccess {
         this.worldData.setSpawn(blockposition);
     }
 
+    public void B(BlockPosition blockposition, float yaw, float pitch) {
+        this.worldData.setSpawn(blockposition, yaw, pitch);
+    }
+
     public boolean a(EntityHuman entityhuman, BlockPosition blockposition) {
         return true;
     }

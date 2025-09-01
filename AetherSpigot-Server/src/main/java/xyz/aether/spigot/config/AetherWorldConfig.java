@@ -127,7 +127,7 @@ public class AetherWorldConfig {
     public double potionSpeed;
 
     private void PotionSpeed() {
-        potionSpeed = getDouble("POTION.potion-speed", 0.593);
+        potionSpeed = getDouble("POTION.potion-speed", 0.500);
     }
 
     public int potionTime;
@@ -139,7 +139,7 @@ public class AetherWorldConfig {
     public double potionOffset;
 
     private void PotionOffset() {
-        potionOffset = getDouble("POTION.potion-offset", -10.0);
+        potionOffset = getDouble("POTION.potion-offset", -18.0);
     }
 
     public boolean reducedSplash;

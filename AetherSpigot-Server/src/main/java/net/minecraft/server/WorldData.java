@@ -16,6 +16,8 @@ public class WorldData {
     private int e;
     private int f;
     private int g;
+    private float spawnYaw;
+    private float spawnPitch;
     private long h;
     private long i;
     private long j;
@@ -108,6 +110,8 @@ public class WorldData {
         this.e = nbttagcompound.getInt("SpawnX");
         this.f = nbttagcompound.getInt("SpawnY");
         this.g = nbttagcompound.getInt("SpawnZ");
+        this.spawnYaw = nbttagcompound.getFloat("SpawnYaw");
+        this.spawnPitch = nbttagcompound.getFloat("SpawnPitch");
         this.h = nbttagcompound.getLong("Time");
         if (nbttagcompound.hasKeyOfType("DayTime", 99)) {
             this.i = nbttagcompound.getLong("DayTime");
@@ -242,6 +246,8 @@ public class WorldData {
         this.e = worlddata.e;
         this.f = worlddata.f;
         this.g = worlddata.g;
+        this.spawnYaw = worlddata.spawnYaw;
+        this.spawnPitch = worlddata.spawnPitch;
         this.h = worlddata.h;
         this.i = worlddata.i;
         this.j = worlddata.j;
@@ -295,6 +301,8 @@ public class WorldData {
         nbttagcompound.setInt("SpawnX", this.e);
         nbttagcompound.setInt("SpawnY", this.f);
         nbttagcompound.setInt("SpawnZ", this.g);
+        nbttagcompound.setFloat("SpawnYaw", this.spawnYaw);
+        nbttagcompound.setFloat("SpawnPitch", this.spawnPitch);
         nbttagcompound.setLong("Time", this.h);
         nbttagcompound.setLong("DayTime", this.i);
         nbttagcompound.setLong("SizeOnDisk", this.k);
@@ -370,6 +378,20 @@ public class WorldData {
         this.e = blockposition.getX();
         this.f = blockposition.getY();
         this.g = blockposition.getZ();
+    }
+
+    public void setSpawn(BlockPosition blockposition, float yaw, float pitch) {
+        this.setSpawn(blockposition);
+        this.spawnYaw = yaw;
+        this.spawnPitch = pitch;
+    }
+
+    public float getSpawnYaw() {
+        return this.spawnYaw;
+    }
+
+    public float getSpawnPitch() {
+        return this.spawnPitch;
     }
 
     public String getName() {
@@ -707,5 +729,6 @@ public class WorldData {
             this.n = name;
         }
     }
+
     // CraftBukkit end
 }
