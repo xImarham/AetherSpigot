@@ -25,10 +25,12 @@ public class VanillaKnockbackProfile extends KnockbackProfile {
         return Arrays.asList(
                 new KnockbackModifier<>(double.class, "horizontal", 0.9055),
                 new KnockbackModifier<>(double.class, "vertical", 0.8835),
-                new KnockbackModifier<>(double.class, "friction", 2.0),
+                new KnockbackModifier<>(double.class, "vertical-friction", 2.0),
+                new KnockbackModifier<>(double.class, "horizontal-friction", 2.0),
                 new KnockbackModifier<>(Integer.class, "no-damage-ticks", 20),
                 new KnockbackModifier<>(double.class, "extra-horizontal", 0.4),
                 new KnockbackModifier<>(double.class, "extra-vertical", 0.4),
+                new KnockbackModifier<>(double.class, "slowdown", 0.6),
                 new KnockbackModifier<>(double.class, "vertical-limit", 0.3534),
                 new KnockbackModifier<>(double.class, "arrow-horizontal", 0.4),
                 new KnockbackModifier<>(double.class, "arrow-vertical", 0.4),
@@ -54,11 +56,12 @@ public class VanillaKnockbackProfile extends KnockbackProfile {
         double horizontal = (double) this.getKnockbackModifier("horizontal", false).getValue();
         double vertical = (double) this.getKnockbackModifier("vertical", false).getValue();
         double verticalLimit = (double) this.getKnockbackModifier("vertical-limit", false).getValue();
-        double friction = (double) this.getKnockbackModifier("friction", false).getValue();
+        double verticalFriction = (double) this.getKnockbackModifier("vertical-friction", false).getValue();
+        double horizontalFriction = (double) this.getKnockbackModifier("horizontal-friction", false).getValue();
 
-        victim.motX /= friction;
-        victim.motY /= friction;
-        victim.motZ /= friction;
+        victim.motX /= horizontalFriction;
+        victim.motY /= verticalFriction;
+        victim.motZ /= horizontalFriction;
 
         victim.motX -= d0 / magnitude * horizontal;
         victim.motY += vertical;
@@ -73,6 +76,9 @@ public class VanillaKnockbackProfile extends KnockbackProfile {
 
     @Override
     public void handleEntityHuman(EntityPlayer victim, Entity source, int i, Vector vector) {
+
+        double slowdown = (double) this.getKnockbackModifier("slowdown", false).getValue();
+
         int kbLevel = 0;
         if (victim.isSprinting())
             ++kbLevel;
@@ -83,6 +89,8 @@ public class VanillaKnockbackProfile extends KnockbackProfile {
             source.g(-MathHelper.sin(victim.yaw * (float) Math.PI / 180.0F) * kbLevel * extraHorizontal,
                     extraVertical,
                     MathHelper.cos(victim.yaw * (float) Math.PI / 180.0F) * kbLevel * extraHorizontal);
+            victim.motX *= slowdown;
+            victim.motZ *= slowdown;
             victim.setSprinting(false);
         }
 
