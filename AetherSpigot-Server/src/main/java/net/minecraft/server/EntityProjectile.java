@@ -25,8 +25,8 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
         float l = 0.25F;
         // AetherSpigot start
         if (this instanceof EntityEnderPearl && world.aetherWorldConfig.smallPearlHitBox) {
-            w = 0.9F;
-            l = 0.9F;
+            w = 0.1F;
+            l = 0.1F;
         }
         // AetherSpigot start
         this.setSize(w, l);
@@ -40,8 +40,11 @@ public abstract class EntityProjectile extends Entity implements IProjectile {
         this.projectileSource = (org.bukkit.entity.LivingEntity) entityliving.getBukkitEntity(); // CraftBukkit
         // AetherSpigot start
         if (this instanceof EntityEnderPearl && world.aetherWorldConfig.smallPearlHitBox) {
-            width = 0.9F;
-            length = 0.9F;
+            width = 0.1F;
+            length = 0.1F;
+        } else {
+            width = 0.25F;
+            length = 0.25F;
         }
         this.setSize(width, length);
         // launch pearls from the eye height

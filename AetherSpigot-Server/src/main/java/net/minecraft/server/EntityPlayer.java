@@ -49,6 +49,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public boolean g;
     public int ping;
     public boolean viewingCredits;
+    public List<Entity> lagCompensatedTicking = new ArrayList<>();
 
     // CraftBukkit start
     public String displayName;
@@ -320,6 +321,20 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public void l() {
         try {
             super.t_();
+
+            for (int i = 0; i < this.lagCompensatedTicking.size(); ++i) {
+                Entity entity = this.lagCompensatedTicking.get(i);
+                entity.tick();
+
+                // Check if size is > 9, this should cover some abuse
+                if (entity.dead || this.lagCompensatedTicking.size() > 9) {
+                    if (!entity.dead) {
+                        entity.compensated = false;
+                    }
+
+                    this.lagCompensatedTicking.remove(i--);
+                }
+            }
 
             for (int i = 0; i < this.inventory.getSize(); ++i) {
                 ItemStack itemstack = this.inventory.getItem(i);

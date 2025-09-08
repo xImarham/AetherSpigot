@@ -19,6 +19,10 @@ public class EntityEnderPearl extends EntityProjectile {
         super(world, entityliving);
         this.c = entityliving;
         this.loadChunks = world.paperSpigotConfig.loadUnloadedEnderPearls; // PaperSpigot
+        if (entityliving instanceof EntityPlayer && world.aetherWorldConfig.compensatedPearls) {
+            ((EntityPlayer) entityliving).lagCompensatedTicking.add(this);
+            compensated = true;
+        }
     }
 
     // AetherSpigot start
@@ -55,9 +59,9 @@ public class EntityEnderPearl extends EntityProjectile {
         }
         // PaperSpigot end
 
-        for (int i = 0; i < 32; ++i) {
-            this.world.addParticle(EnumParticle.PORTAL, this.locX, this.locY + this.random.nextDouble() * 2.0D, this.locZ, this.random.nextGaussian(), 0.0D, this.random.nextGaussian(), new int[0]);
-        }
+    //    for (int i = 0; i < 32; ++i) {
+    //        this.world.addParticle(EnumParticle.PORTAL, this.locX, this.locY + this.random.nextDouble() * 2.0D, this.locZ, this.random.nextGaussian(), 0.0D, this.random.nextGaussian(), new int[0]);
+    //    }
 
         if (!this.world.isClientSide) {
             if (entityliving instanceof EntityPlayer) {
@@ -67,8 +71,8 @@ public class EntityEnderPearl extends EntityProjectile {
                     // CraftBukkit start - Fire PlayerTeleportEvent
                     org.bukkit.craftbukkit.entity.CraftPlayer player = entityplayer.getBukkitEntity();
                     org.bukkit.Location location = getBukkitEntity().getLocation();
-                    location.setPitch(player.getLocation().getPitch());
-                    location.setYaw(player.getLocation().getYaw());
+                //    location.setPitch(player.getLocation().getPitch()); neet to check if this helps on higher ping or no
+                //    location.setYaw(player.getLocation().getYaw());
                     // AetherSpigot start
                     if (movingobjectposition.entity instanceof EntityPlayer) {
                         location.setY(movingobjectposition.entity.locY);
@@ -108,6 +112,8 @@ public class EntityEnderPearl extends EntityProjectile {
         }
 
     }
+
+
 
     // IonSpigot start - Lag Compensated Pearls
     @Override

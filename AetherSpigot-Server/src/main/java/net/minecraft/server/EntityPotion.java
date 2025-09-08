@@ -23,6 +23,10 @@ public class EntityPotion extends EntityProjectile {
     public EntityPotion(World world, EntityLiving entityliving, ItemStack itemstack) {
         super(world, entityliving);
         this.item = itemstack;
+        if (entityliving instanceof EntityPlayer && world.aetherWorldConfig.compensatedPots) {
+            ((EntityPlayer) entityliving).lagCompensatedTicking.add(this);
+            compensated = true;
+        }
     }
 
     public EntityPotion(World world, double d0, double d1, double d2, ItemStack itemstack) {
@@ -60,6 +64,16 @@ public class EntityPotion extends EntityProjectile {
         }
 
         return this.item.getData();
+    }
+
+    @Override
+    public void t_() {
+        if (!compensated) {
+            tick();
+        }
+    }
+    public void tick() {
+        super.t_();
     }
 
     @Override
