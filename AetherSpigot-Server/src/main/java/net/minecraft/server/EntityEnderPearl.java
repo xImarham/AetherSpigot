@@ -118,6 +118,12 @@ public class EntityEnderPearl extends EntityProjectile {
     // IonSpigot start - Lag Compensated Pearls
     @Override
     public void t_() {
+        if (!compensated) {
+            tick();
+        }
+    }
+
+    public void tick() {
         EntityLiving entityliving = this.getShooter();
 
         if (entityliving != null && entityliving instanceof EntityHuman && !entityliving.isAlive()) {
